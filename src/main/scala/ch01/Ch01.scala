@@ -6,8 +6,8 @@ object Ch01:
     def id[A](a: A): A = a
 
   object Task2:
-    case class Composition[A, B](f: A => B):
-      infix def <<[C](g: B => C): A => C = a => g(f(a))
+    case class Composition[B, C](g: B => C):
+      infix def <<[A](f: A => B): A => C = a => g(f(a))
 
-    given functionToComposition[A, B]: Conversion[A => B, Composition[A, B]] with
-      def apply(f: A => B): Composition[A, B] = Composition[A, B](f)
+    given functionToComposition[B, C]: Conversion[B => C, Composition[B, C]] with
+      def apply(f: B => C): Composition[B, C] = Composition[B, C](f)
